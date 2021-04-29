@@ -5,8 +5,8 @@
   
   <entry>
     <title>种群竞争模型</title>
-    <link href="/2021/04/29/%E7%81%B0%E8%89%B2%E9%A2%84%E6%B5%8B/"/>
-    <url>/2021/04/29/%E7%81%B0%E8%89%B2%E9%A2%84%E6%B5%8B/</url>
+    <link href="/2021/04/28/Lotka_Volterra/"/>
+    <url>/2021/04/28/Lotka_Volterra/</url>
     
     <content type="html"><![CDATA[<p>在自然界中，种群数量会随着其天敌或食物的数量变化而变化，本文用Lotka_Volterra模型模拟了兔子与狐狸种群数量的变化规律，并考虑兔子的环境容纳量做了进一步优化</p><span id="more"></span><h2 id="问题背景与重述"><a href="#问题背景与重述" class="headerlink" title="问题背景与重述"></a>问题背景与重述</h2><h3 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h3><p><img src="/img/MATLAb/1.png"><br>使用一阶非线性微分方程组模拟数量关系，方程组无解析解</p><h3 id="问题重述"><a href="#问题重述" class="headerlink" title="问题重述"></a>问题重述</h3><p>为研究变化规律，提出以下问题<br><img src="/img/MATLAb/2.png"></p><h2 id="问题求解"><a href="#问题求解" class="headerlink" title="问题求解"></a>问题求解</h2><h3 id="问题1-3"><a href="#问题1-3" class="headerlink" title="问题1~3"></a>问题1~3</h3><p>按题目调好参数后运行程序，源码及结果如下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">%% 种群竞争模型<br>clear,clc;<br>rabbitFox=@(t,x)[x(1)*(2-0.01*x(2));x(2)*(-1+0.01*x(1))];<br>% 积分范围 0~30，初始值分别为300，150，x为所有解，t为每一个积分点<br>[t,x]=ode45(rabbitFox,[0,30],[300,150]);<br>subplot(1,2,1);plot(t,x(:,1),<span class="hljs-string">&#x27;-&#x27;</span>,t,x(:,2),<span class="hljs-string">&#x27;-*&#x27;</span>);<br>legend(<span class="hljs-string">&#x27;x1(t)-兔子&#x27;</span>,<span class="hljs-string">&#x27;x2(t)-狐狸&#x27;</span>);<br>xlabel(<span class="hljs-string">&#x27;时间&#x27;</span>);ylabel(<span class="hljs-string">&#x27;物种数量&#x27;</span>);<br>grid on;<br>% 画相位图<br>subplot(1,2,2);plot(x(:,1),x(:,2));<br>xlabel(<span class="hljs-string">&#x27;兔子数量&#x27;</span>);ylabel(<span class="hljs-string">&#x27;狐狸数量&#x27;</span>);<br>grid on;<br></code></pre></td></tr></table></figure><p><img src="/img/MATLAb/3.png"></p><p>可以看到，兔子与狐狸的数量成周期性变化，呈负相关，周期由初始条件决定。2、3问改动参数即可得到答案，结果与1类似</p><h3 id="问题4"><a href="#问题4" class="headerlink" title="问题4"></a>问题4</h3><p>按上题源码，我们取初始值为100，200，第4问运行结果如下<br><img src="/img/MATLAb/4.png"><br>可以看到，种群数量处于稳定状态，我们改动初值为98，198，结果如下<br><img src="/img/MATLAb/5.png"><br>发现稍微偏离平衡点后，种群数量开始在小范围内波动，正如题目所述</p><h2 id="模型优化"><a href="#模型优化" class="headerlink" title="模型优化"></a>模型优化</h2><h3 id="基于兔子环境容纳量改进模型"><a href="#基于兔子环境容纳量改进模型" class="headerlink" title="基于兔子环境容纳量改进模型"></a>基于兔子环境容纳量改进模型</h3><p>修改后的方程组及符号含义如下<br><img src="/img/MATLAb/6.png"><br>当数量r大于R时，取值为负，种群数量永远不会超过R值，不妨取环境容纳量R为400，对函数rabbitFox及参数调整如下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">%% 种群竞争模型<br>clear,clc;<br>rabbitFox=@(t,x)[2*x(1)*(1-x(1)/400-0.005*x(2));x(2)*(-1+0.01*x(1))];<br>% 积分范围 0~30，初始值分别为300，150，x为所有解，t为每一个积分点<br>[t,x]=ode45(rabbitFox,[0,50],[300,150]);<br>subplot(1,2,1);plot(t,x(:,1),<span class="hljs-string">&#x27;-&#x27;</span>,t,x(:,2),<span class="hljs-string">&#x27;-*&#x27;</span>);<br>legend(<span class="hljs-string">&#x27;x1(t)-兔子&#x27;</span>,<span class="hljs-string">&#x27;x2(t)-狐狸&#x27;</span>);<br>xlabel(<span class="hljs-string">&#x27;时间&#x27;</span>);ylabel(<span class="hljs-string">&#x27;物种数量&#x27;</span>);<br>grid on;<br>% 画相位图<br>subplot(1,2,2);plot(x(:,1),x(:,2));<br>xlabel(<span class="hljs-string">&#x27;兔子数量&#x27;</span>);ylabel(<span class="hljs-string">&#x27;狐狸数量&#x27;</span>);<br>grid on;<br></code></pre></td></tr></table></figure><p>运行结果如下<br><img src="/img/MATLAb/7.png"><br>可以发现，种群数量在波动中不断稳定，最终稳定在某个数值附近，这也与正常自然环境下的情况相吻合</p><h3 id="模型的进一步改进"><a href="#模型的进一步改进" class="headerlink" title="模型的进一步改进"></a>模型的进一步改进</h3><ul><li>考虑狐狸的环境容纳量</li><li>考虑兔子其它天敌和狐狸天敌的影响</li><li>考虑自然灾害、人为捕捉等因素</li></ul>]]></content>
     
@@ -25,31 +25,6 @@
       <tag>MATLAB</tag>
       
       <tag>模型</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>灰色预测</title>
-    <link href="/2021/04/28/Lotka_Volterra/"/>
-    <url>/2021/04/28/Lotka_Volterra/</url>
-    
-    <content type="html"><![CDATA[]]></content>
-    
-    
-    <categories>
-      
-      <category>MATLAB</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Test</tag>
       
     </tags>
     
