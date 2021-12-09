@@ -1,0 +1,686 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="34道MySQL高频练习题">
+  <meta name="author" content="Yhai">
+  <meta name="keywords" content="">
+  
+  <title>MySQL练习题 - YH</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"y-hai.github.io","root":"/","version":"1.8.9-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>YH_Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default0.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MySQL练习题">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-09 17:34" pubdate>
+        2021年12月9日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      36
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MySQL练习题</h1>
+            
+            <div class="markdown-body">
+              <p>34道MySQL高频练习题</p>
+<span id="more"></span>
+
+<p><strong>基础表格为Oracle自带表：emp、dept、salgrade</strong></p>
+<h2 id="1、取得每个部门最高薪水的人员名称"><a href="#1、取得每个部门最高薪水的人员名称" class="headerlink" title="1、取得每个部门最高薪水的人员名称"></a>1、取得每个部门最高薪水的人员名称</h2><ul>
+<li>首先获取每个部门的最高薪水、部门号</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select deptno, max(sal) maxsal from emp group by deptno;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>其次取上一步结果与emp表进行内连接进行查询</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select t.deptno, e.ename, t.maxsal <br>from emp e<br>join (select deptno, max(sal) maxsal from emp group by deptno) t<br>on e.deptno &#x3D; t.deptno and e.sal &#x3D; t.maxsal;	<br></code></pre></td></tr></table></figure>
+
+<h2 id="2、哪些人的薪水在部门的平均薪水之上"><a href="#2、哪些人的薪水在部门的平均薪水之上" class="headerlink" title="2、哪些人的薪水在部门的平均薪水之上"></a>2、哪些人的薪水在部门的平均薪水之上</h2><ul>
+<li>首先找到各部门的平均薪水</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select deptno, avg(sal) from emp group by deptno;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>其次找到员工号，员工姓名</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select e.empno, e.ename, e.sal, t.*<br>from emp e<br>join (select deptno, avg(sal) avgsal from emp group by deptno) t<br>on e.deptno &#x3D; t.deptno<br>where e.sal &gt; t.avgsal;<br></code></pre></td></tr></table></figure>
+
+<h2 id="3、取得部门中（所有人的）平均的薪水等级"><a href="#3、取得部门中（所有人的）平均的薪水等级" class="headerlink" title="3、取得部门中（所有人的）平均的薪水等级"></a>3、取得部门中（所有人的）平均的薪水等级</h2><ul>
+<li>首先连接e表和s表，再按照deptno分组聚合sal求平均值</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select e.deptno, avg(s.grade) avggrade<br>from emp e<br>join salgrade s<br>on e.sal between s.losal and s.hisal<br>group by deptno;<br></code></pre></td></tr></table></figure>
+
+<h2 id="4、不准用组函数（Max-），取得最高薪水"><a href="#4、不准用组函数（Max-），取得最高薪水" class="headerlink" title="4、不准用组函数（Max ），取得最高薪水"></a>4、不准用组函数（Max ），取得最高薪水</h2><ul>
+<li>降序排序后输出第一行</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select empno, sal<br>from emp<br>order by sal desc<br>limit 1;<br></code></pre></td></tr></table></figure>
+
+<h2 id="5、取得平均薪水最高的部门的部门编号"><a href="#5、取得平均薪水最高的部门的部门编号" class="headerlink" title="5、取得平均薪水最高的部门的部门编号"></a>5、取得平均薪水最高的部门的部门编号</h2><ul>
+<li>首先获得每个部门的平均薪水</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select deptno, avg(sal) avgsal from emp group by deptno;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>其次获得平均薪水最高的部门编号</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select deptno<br>from emp<br>group by deptno<br>order by avg(sal) desc<br>limit 1;<br></code></pre></td></tr></table></figure>
+
+<h2 id="6、取得平均薪水最高的部门的部门名称"><a href="#6、取得平均薪水最高的部门的部门名称" class="headerlink" title="6、取得平均薪水最高的部门的部门名称"></a>6、取得平均薪水最高的部门的部门名称</h2><ul>
+<li>首先获得每个部门的平均薪水</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select deptno, avg(sal) avgsal from emp group by deptno;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>其次获得部门名称</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select d.dname, t.avgsal<br>from (select deptno, avg(sal) avgsal from emp group by deptno) t<br>join dept d<br>on t.deptno &#x3D; d.deptno<br>order by t.avgsal desc<br>limit 1;<br></code></pre></td></tr></table></figure>
+
+<h2 id="7、求平均薪水的等级最低的部门的部门名称"><a href="#7、求平均薪水的等级最低的部门的部门名称" class="headerlink" title="7、求平均薪水的等级最低的部门的部门名称"></a>7、求平均薪水的等级最低的部门的部门名称</h2><ul>
+<li>首先求出每个部门平均薪水</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select deptno, avg(sal) avgsal from emp group by deptno;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>其次求出每个部门平均薪水的等级</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select t.deptno, t.avgsal, s.grade <br>from (select deptno, avg(sal) avgsal from emp group by deptno) t<br>join salgrade s<br>on t.avgsal between s.losal and s.hisal<br>order by t.avgsal;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>最后求出等级最低的部门的名称</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select t.deptno, d.dname, s.grade<br>from (select deptno, avg(sal) avgsal from emp group by deptno) t<br>join salgrade s<br>on t.avgsal between s.losal and s.hisal<br>join dept d<br>on t.deptno &#x3D; d.deptno<br>order by t.avgsal<br>limit 1;<br></code></pre></td></tr></table></figure>
+
+<h2 id="8、取得比普通员工-员工代码没有在-mgr-字段上出现的-的最高薪水还要高的领导人姓名"><a href="#8、取得比普通员工-员工代码没有在-mgr-字段上出现的-的最高薪水还要高的领导人姓名" class="headerlink" title="8、取得比普通员工(员工代码没有在 mgr 字段上出现的) 的最高薪水还要高的领导人姓名"></a>8、取得比普通员工(员工代码没有在 mgr 字段上出现的) 的最高薪水还要高的领导人姓名</h2><p><strong>前提：比普通员工最高薪水还要高的未必是领导</strong></p>
+<ul>
+<li>首先获得领导人的编号</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select mgr from emp where mgr is not null;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>其次获得普通员工的最高工资</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select max(sal) maxsal<br>from emp<br>where empno not in (select mgr from emp where mgr is not null);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>最后找出工资比<strong>maxsal</strong>高的领导姓名</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select t.ename, t.sal<br>from ((select ename, sal from emp where mgr is not null) union (select ename, sal from emp where mgr is null)) t<br>where t.sal &gt; (select max(sal) maxsal<br>from emp<br>where empno not in (select mgr from emp where mgr is not null));<br></code></pre></td></tr></table></figure>
+
+<h2 id="9、取得薪水最高的前五名员工"><a href="#9、取得薪水最高的前五名员工" class="headerlink" title="9、取得薪水最高的前五名员工"></a>9、取得薪水最高的前五名员工</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select ename, sal from emp order by sal desc limit 5;<br></code></pre></td></tr></table></figure>
+
+<h2 id="10、取得薪水最高的第六到第十名员工"><a href="#10、取得薪水最高的第六到第十名员工" class="headerlink" title="10、取得薪水最高的第六到第十名员工"></a>10、取得薪水最高的第六到第十名员工</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select ename, sal from emp order by sal desc limit 5, 5;<br></code></pre></td></tr></table></figure>
+
+<h2 id="11、取得最后入职的-5-名员工"><a href="#11、取得最后入职的-5-名员工" class="headerlink" title="11、取得最后入职的 5 名员工"></a>11、取得最后入职的 5 名员工</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select ename from emp order by hiredate desc limit 5;<br></code></pre></td></tr></table></figure>
+
+<h2 id="12、取得每个薪水等级有多少员工"><a href="#12、取得每个薪水等级有多少员工" class="headerlink" title="12、取得每个薪水等级有多少员工"></a>12、取得每个薪水等级有多少员工</h2><ul>
+<li>首先获得每个员工的薪水等级</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select e.deptno, s.grade<br>from emp e<br>join salgrade s<br>on e.sal between s.losal and s.hisal;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>其次对每个薪水等级的员工进行计数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select s.grade, count(e.deptno) cntno<br>from emp e<br>join salgrade s<br>on e.sal between s.losal and s.hisal<br>group by s.grade;<br></code></pre></td></tr></table></figure>
+
+<h2 id="13、面试题"><a href="#13、面试题" class="headerlink" title="13、面试题"></a>13、面试题</h2><p>有 3 个表 S(学生表)，C（课程表），SC（学生选课表）<br>S（SNO，SNAME）代表（学号，姓名）<br>C（CNO，CNAME，CTEACHER）代表（课号，课名，教师）<br>SC（SNO，CNO，SCGRADE）代表（学号，课号，成绩）<br>问题：</p>
+<ol>
+<li>找出没选过“黎明”老师的所有学生姓名。</li>
+</ol>
+<ul>
+<li>进行多表连接where筛选</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select S.sname<br>from SC<br>join S<br>on SC.sno &#x3D; S.sno<br>join C<br>on SC.cno &#x3D; C.cno<br>where C.cteacher !&#x3D; &#39;黎明&#39;;<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>列出 2 门以上（含2 门）不及格学生姓名及平均成绩。</li>
+</ol>
+<ul>
+<li>多表连接后进行分组聚合筛选</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select SC.sno, avg(scgrade)<br>from SC<br>join S<br>on SC.sno &#x3D; S.sno<br>group by SC.sno;<br>having count(SC.scgrade &lt; 60) &gt;&#x3D; 2;<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>既学过 1 号课程又学过 2 号课所有学生的姓名。</li>
+</ol>
+<ul>
+<li>首先找到学过 1 号课程的所有学生的学号</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select distinct sno from SC where cno &#x3D; 1;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>其次找到既学过 1 号课程又学过 2 号课所有学生的姓名</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select SC.sno<br>from SC<br>join S<br>on SC.sno &#x3D; S.sno<br>where SC.cno &#x3D; 2 and SC.cno in (select sno from SC where cno &#x3D; 1);<br></code></pre></td></tr></table></figure>
+
+<h2 id="14、列出所有员工及领导的姓名"><a href="#14、列出所有员工及领导的姓名" class="headerlink" title="14、列出所有员工及领导的姓名"></a>14、列出所有员工及领导的姓名</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select e1.ename, e2.ename<br>from emp e1<br>left join emp e2<br>on e1.mgr &#x3D; e2.empno;<br></code></pre></td></tr></table></figure>
+
+<h2 id="15、列出受雇日期早于其直接上级的所有员工的编号-姓名-部门名称"><a href="#15、列出受雇日期早于其直接上级的所有员工的编号-姓名-部门名称" class="headerlink" title="15、列出受雇日期早于其直接上级的所有员工的编号,姓名,部门名称"></a>15、列出受雇日期早于其直接上级的所有员工的编号,姓名,部门名称</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select e1.empno, e1.ename, d.dname<br>from emp e1<br>join emp e2<br>on e1.mgr &#x3D; e2.empno<br>left join dept d<br>on e1.deptno &#x3D; d.deptno<br>where e1.hiredate &lt; e2.hiredate;<br></code></pre></td></tr></table></figure>
+
+<h2 id="16、列出部门名称和这些部门的员工信息-同时列出那些没有员工的部门"><a href="#16、列出部门名称和这些部门的员工信息-同时列出那些没有员工的部门" class="headerlink" title="16、列出部门名称和这些部门的员工信息, 同时列出那些没有员工的部门"></a>16、列出部门名称和这些部门的员工信息, 同时列出那些没有员工的部门</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select e.*, d.dname<br>from emp e<br>right join dept d<br>on e.deptno &#x3D; d.deptno;<br></code></pre></td></tr></table></figure>
+
+<h2 id="17、列出至少有-5-个员工的所有部门"><a href="#17、列出至少有-5-个员工的所有部门" class="headerlink" title="17、列出至少有 5 个员工的所有部门"></a>17、列出至少有 5 个员工的所有部门</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select d.dname, count(e.empno) cntno<br>from emp e<br>left join dept d<br>on e.deptno &#x3D; d.deptno<br>group by e.deptno<br>having count(e.empno) &gt;&#x3D; 5;<br></code></pre></td></tr></table></figure>
+
+<h2 id="18、列出薪金比”SMITH”-多的所有员工信息"><a href="#18、列出薪金比”SMITH”-多的所有员工信息" class="headerlink" title="18、列出薪金比”SMITH” 多的所有员工信息"></a>18、列出薪金比”SMITH” 多的所有员工信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from emp where sal &gt; (select sal from emp where ename &#x3D; &#39;smith&#39;);<br></code></pre></td></tr></table></figure>
+
+<h2 id="19、列出所有”CLERK”-办事员-的姓名及其部门名称-部门的人数"><a href="#19、列出所有”CLERK”-办事员-的姓名及其部门名称-部门的人数" class="headerlink" title="19、列出所有”CLERK”( 办事员) 的姓名及其部门名称, 部门的人数"></a>19、列出所有”CLERK”( 办事员) 的姓名及其部门名称, 部门的人数</h2><ul>
+<li>首先列出办事员的姓名及其部门名称</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select e.ename, d.dname<br>from emp e<br>join dept d<br>on e.deptno &#x3D; d.deptno<br>where e.job &#x3D; &#39;clerk&#39;;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>其次求出各部门的人数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select deptno, count(empno) from emp group by deptno;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>最后进行连接</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select e.ename, d.dname, t.cnteno<br>from emp e<br>join dept d<br>on e.deptno &#x3D; d.deptno<br>left join (select deptno, count(empno) cnteno from emp group by deptno) t<br>on e.deptno &#x3D; t.deptno<br>where e.job &#x3D; &#39;clerk&#39;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="20、列出最低薪金大于-1500-的各种工作及从事此工作的全部雇员人数"><a href="#20、列出最低薪金大于-1500-的各种工作及从事此工作的全部雇员人数" class="headerlink" title="20、列出最低薪金大于 1500 的各种工作及从事此工作的全部雇员人数"></a>20、列出最低薪金大于 1500 的各种工作及从事此工作的全部雇员人数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select job, count(empno) cnteno<br>from emp<br>group by job<br>having min(sal) &gt; 1500;<br></code></pre></td></tr></table></figure>
+
+<h2 id="21、列出在部门”SALES”-lt-销售部-gt-工作的员工的姓名-假定不知道销售部的部门编号"><a href="#21、列出在部门”SALES”-lt-销售部-gt-工作的员工的姓名-假定不知道销售部的部门编号" class="headerlink" title="21、列出在部门”SALES”&lt; 销售部&gt; 工作的员工的姓名, 假定不知道销售部的部门编号"></a>21、列出在部门”SALES”&lt; 销售部&gt; 工作的员工的姓名, 假定不知道销售部的部门编号</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select e.ename<br>from emp e<br>join dept d<br>on e.deptno &#x3D; d.deptno<br>where d.dname &#x3D; &#39;sales&#39;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="22、列出薪金高于公司平均薪金的所有员工-所在部门-上级领导-雇员的工资等级"><a href="#22、列出薪金高于公司平均薪金的所有员工-所在部门-上级领导-雇员的工资等级" class="headerlink" title="22、列出薪金高于公司平均薪金的所有员工, 所在部门, 上级领导, 雇员的工资等级"></a>22、列出薪金高于公司平均薪金的所有员工, 所在部门, 上级领导, 雇员的工资等级</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select e1.ename, e1.deptno, e2.ename, s.grade<br>from emp e1<br>join salgrade s<br>on e1.sal between s.losal and s.hisal<br>left join emp e2<br>on e1.mgr &#x3D; e2.empno<br>where e1.sal &gt; (select avg(sal) from emp);<br></code></pre></td></tr></table></figure>
+
+<h2 id="23、列出与”SCOTT”从事相同工作的所有员工及部门名称"><a href="#23、列出与”SCOTT”从事相同工作的所有员工及部门名称" class="headerlink" title="23、列出与”SCOTT”从事相同工作的所有员工及部门名称"></a>23、列出与”SCOTT”从事相同工作的所有员工及部门名称</h2><ul>
+<li>首先列出从事相同工作的员工及部门号</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select ename, deptno<br>from emp<br>where job &#x3D; (select job from emp where ename &#x3D; &#39;scott&#39;) and ename !&#x3D; &#39;scott&#39;;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>其次多表连接列出部门名称</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select e.ename, e.deptno, d.dname<br>from emp e<br>join dept d<br>on e.deptno &#x3D; d.deptno<br>where e.job &#x3D; (select job from emp where ename &#x3D; &#39;scott&#39;) and e.ename !&#x3D; &#39;scott&#39;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="24、列出薪金等于部门-30-中员工的薪金的其他员工的姓名和薪金"><a href="#24、列出薪金等于部门-30-中员工的薪金的其他员工的姓名和薪金" class="headerlink" title="24、列出薪金等于部门 30 中员工的薪金的其他员工的姓名和薪金"></a>24、列出薪金等于部门 30 中员工的薪金的其他员工的姓名和薪金</h2><ul>
+<li>首先求出部门30的员工的薪金</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select sal from emp where deptno &#x3D; 30;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>其次求出部门不是30但薪金等于30部门员工的员工的姓名和薪金</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select ename, sal<br>from emp<br>where deptno !&#x3D; 30 and (sal in (select sal from emp where deptno &#x3D; 30));<br></code></pre></td></tr></table></figure>
+
+<h2 id="25、列出薪金高于在部门-30-工作的所有员工的薪金的员工姓名和薪金及部门名称"><a href="#25、列出薪金高于在部门-30-工作的所有员工的薪金的员工姓名和薪金及部门名称" class="headerlink" title="25、列出薪金高于在部门 30 工作的所有员工的薪金的员工姓名和薪金及部门名称"></a>25、列出薪金高于在部门 30 工作的所有员工的薪金的员工姓名和薪金及部门名称</h2><ul>
+<li>首先求出部门30的最高薪资</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select max(sal) maxsal from emp where deptno &#x3D; 30;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>其次找出所有薪资大于<strong>maxsal</strong>的员工姓名、薪金、部门名称</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select e.ename, e.sal, d.dname<br>from emp e<br>join dept d<br>on e.deptno &#x3D; d.deptno<br>where e.sal &gt; (select max(sal) maxsal from emp where deptno &#x3D; 30);<br></code></pre></td></tr></table></figure>
+
+<h2 id="26、列出在每个部门工作的员工数量-平均工资和平均服务期限"><a href="#26、列出在每个部门工作的员工数量-平均工资和平均服务期限" class="headerlink" title="26、列出在每个部门工作的员工数量, 平均工资和平均服务期限"></a>26、列出在每个部门工作的员工数量, 平均工资和平均服务期限</h2><ul>
+<li>首先求出每个部门的员工数量、平均薪资</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select deptno, count(empno) cntno, avg(sal) avgsal from emp group by deptno;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>其次求出每个部门的平均服务期限</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select d.deptno, count(e.empno) cntno,ifnull(avg(e.sal),0) avgsal, ifnull(avg(timestampdiff(YEAR, hiredate, now())), 0) avgservicetime<br>from emp e<br>right join dept d<br>on e.deptno &#x3D; d.deptno<br>group by d.deptno;<br></code></pre></td></tr></table></figure>
+
+<h2 id="27、列出所有员工的姓名、部门名称和工资"><a href="#27、列出所有员工的姓名、部门名称和工资" class="headerlink" title="27、列出所有员工的姓名、部门名称和工资"></a>27、列出所有员工的姓名、部门名称和工资</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select e.ename, d.dname, e.sal<br>from emp e<br>join dept d<br>on e.deptno &#x3D; d.deptno;<br></code></pre></td></tr></table></figure>
+
+<h2 id="28、列出所有部门的详细信息和人数"><a href="#28、列出所有部门的详细信息和人数" class="headerlink" title="28、列出所有部门的详细信息和人数"></a>28、列出所有部门的详细信息和人数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select d.*, count(e.empno) cntno<br>from emp e<br>join dept d<br>on e.deptno &#x3D; d.deptno<br>group by e.deptno;<br></code></pre></td></tr></table></figure>
+
+<h2 id="29、列出各种工作的最低工资及从事此工作的雇员姓名"><a href="#29、列出各种工作的最低工资及从事此工作的雇员姓名" class="headerlink" title="29、列出各种工作的最低工资及从事此工作的雇员姓名"></a>29、列出各种工作的最低工资及从事此工作的雇员姓名</h2><ul>
+<li>先找出各种工作的最低工资</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select job, min(sal) minsal from emp group by job;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>再进行多表连接查询雇员姓名</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select e.ename, e.job, t.minsal<br>from emp e<br>join (select job, min(sal) minsal from emp group by job) t<br>on e.job &#x3D; t.job and e.sal &#x3D; t.minsal;<br></code></pre></td></tr></table></figure>
+
+<h2 id="30、列出各个部门的MANAGER-领导-的最低薪金"><a href="#30、列出各个部门的MANAGER-领导-的最低薪金" class="headerlink" title="30、列出各个部门的MANAGER(领导)的最低薪金"></a>30、列出各个部门的MANAGER(领导)的最低薪金</h2><ul>
+<li>首先找出所有领导的员工号</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select distinct ifnull(mgr, empno) empno from emp;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>其次找出每个部门领导的最低薪资</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select deptno, min(sal) minsal<br>from emp<br>where empno in (select distinct ifnull(mgr, empno) from emp)<br>group by deptno;<br></code></pre></td></tr></table></figure>
+
+<h2 id="31、列出所有员工的年工资-按年薪从低到高排序"><a href="#31、列出所有员工的年工资-按年薪从低到高排序" class="headerlink" title="31、列出所有员工的年工资, 按年薪从低到高排序"></a>31、列出所有员工的年工资, 按年薪从低到高排序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select *, (sal + ifnull(comm, 0)) * 12 sall<br>from emp <br>order by (sal + ifnull(comm, 0)) * 12 asc;<br></code></pre></td></tr></table></figure>
+
+<h2 id="32、求出员工领导的薪水超过3000的员工名称与领导"><a href="#32、求出员工领导的薪水超过3000的员工名称与领导" class="headerlink" title="32、求出员工领导的薪水超过3000的员工名称与领导"></a>32、求出员工领导的薪水超过3000的员工名称与领导</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select e1.ename, e2.ename, e2.sal<br>from emp e1<br>join emp e2<br>on e1.mgr &#x3D; e2.empno<br>where e2.sal &gt; 3000;<br></code></pre></td></tr></table></figure>
+
+<h2 id="33、求出部门名称中-带’S’字符的部门员工的工资合计、部门人数"><a href="#33、求出部门名称中-带’S’字符的部门员工的工资合计、部门人数" class="headerlink" title="33、求出部门名称中, 带’S’字符的部门员工的工资合计、部门人数"></a>33、求出部门名称中, 带’S’字符的部门员工的工资合计、部门人数</h2><ul>
+<li>首先求出部门名称带’S’字符的部门</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select deptno from dept where dname like &#39;%S%&#39;;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>其次求出目标部门的工资合计、部门人数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select t.deptno, ifnull(sum(e.sal), 0) sumsal, count(e.empno) cntempno<br>from emp e<br>right join (select deptno from dept where dname like &#39;%S%&#39;) t<br>on e.deptno &#x3D; t.deptno<br>group by e.deptno;<br></code></pre></td></tr></table></figure>
+
+<h2 id="34、给任职日期超过30-年的员工加薪-10"><a href="#34、给任职日期超过30-年的员工加薪-10" class="headerlink" title="34、给任职日期超过30 年的员工加薪 10%"></a>34、给任职日期超过30 年的员工加薪 10%</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">update emp<br>set sal &#x3D; sal * 1.1<br>where timestampdiff(YEAR, hiredate, now()) &gt; 30;<br></code></pre></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/MySQL/">MySQL</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/MySQL/">MySQL</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/08/%E8%93%9D%E6%A1%A5%E6%9D%AF%E6%80%BB%E7%BB%93/">
+                        <span class="hidden-mobile">种群竞争模型</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
